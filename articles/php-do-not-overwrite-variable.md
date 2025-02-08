@@ -3,7 +3,8 @@ title: "PHPで変数が上書きされていることをチェックする拡張
 emoji: "😎"
 type: "idea" # tech: 技術記事 / idea: アイデア
 topics: ["php", "vscode", "vscodeextension"]
-published: false
+published: true
+published_at : "2025-02-08 13:30"
 ---
 
 ## 概要

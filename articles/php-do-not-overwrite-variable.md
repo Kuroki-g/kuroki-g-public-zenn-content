@@ -2,7 +2,7 @@
 title: "PHPで変数が上書きされていることをチェックする拡張機能「PHP DO NOT OVERWRITE VARIABLE」の作成"
 emoji: "😎"
 type: "idea" # tech: 技術記事 / idea: アイデア
-topics: ["php", "vscode"]
+topics: ["php", "vscode", "vscodeextension"]
 published: false
 ---
 
@@ -26,5 +26,6 @@ published: false
 ## ソースコード
 
 ソースコードは以下のGitHubリポジトリで公開されています。
+ライセンスはGPL-3.0です。
 
 [GitHub - Kuroki-g/php-do-not-overwrite-variable](https://github.com/Kuroki-g/php-do-not-overwrite-variable)

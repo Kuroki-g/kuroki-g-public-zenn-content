@@ -4,7 +4,7 @@ emoji: "🐈"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["csharp", "dotnet", "aspdotnetcore", "duckdb", "excel"]
 published: true
-published_at : "2025-03-09 0:30"
+published_at : "2025-03-09 00:30"
 ---
 
 

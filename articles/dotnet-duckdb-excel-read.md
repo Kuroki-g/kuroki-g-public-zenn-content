@@ -1,8 +1,8 @@
 ---
-title: ".NETでDuckDBからExcelファイルを読み書きする"
+title: "DuckDBでExcelファイルを読み取る - C#"
 emoji: "🐈"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["dotnet", "aspdotnetcore", "duckdb", "excel"]
+topics: ["csharp", "dotnet", "aspdotnetcore", "duckdb", "excel"]
 published: true
 published_at : "2025-03-09 0:30"
 ---

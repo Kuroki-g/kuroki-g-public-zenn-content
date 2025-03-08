@@ -59,8 +59,8 @@ dotnet add package DuckDB.NET.Data.Full
 データセットはいい感じのがなかったため
 [年齢(5歳階級)、男女別人口(2024年9月確定値、2025年2月概算値）](https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200524&tstat=000000090001&cycle=1&year=20250&month=11010302&tclass1=000001011678)から取得。
 
-![出典：政府統計の総合窓口(e-Stat)（https://www.e-stat.go.jp/） 年齢(5歳階級)、男女別人口(2024年9月確定値、2025年2月概算値）の最上部を撮影](/images\dotnet-duckdb-excel-read\image1.png)
-![出典：政府統計の総合窓口(e-Stat)（https://www.e-stat.go.jp/） 年齢(5歳階級)、男女別人口(2024年9月確定値、2025年2月概算値）]( /images\dotnet-duckdb-excel-read\image2.png)
+![出典：政府統計の総合窓口(e-Stat)（https://www.e-stat.go.jp/） 年齢(5歳階級)、男女別人口(2024年9月確定値、2025年2月概算値）の最上部を撮影](/images/dotnet-duckdb-excel-read/image1.png)
+![出典：政府統計の総合窓口(e-Stat)（https://www.e-stat.go.jp/） 年齢(5歳階級)、男女別人口(2024年9月確定値、2025年2月概算値）]( /images/dotnet-duckdb-excel-read/image2.png)
 
 ## データの読み取り
 

@@ -1,5 +1,5 @@
 ---
-title: "BlazorWebAssemblyでExcelファイルを読み取る - C#"
+title: "BlazorWebAssembly + OpenXMLでExcelファイルを生成する - C#"
 emoji: "😸"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["csharp", "dotnet", "blazorwebassembly", "blazor", "excel"]

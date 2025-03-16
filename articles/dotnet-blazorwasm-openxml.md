@@ -2,7 +2,7 @@
 title: "BlazorWebAssemblyでExcelファイルを読み取る - C#"
 emoji: "😸"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["csharp", "dotnet", "aspdotnetcore", "blazorwebassembly", "blazor", "excel"]
+topics: ["csharp", "dotnet", "blazorwebassembly", "blazor", "excel"]
 published: false
 ---
 

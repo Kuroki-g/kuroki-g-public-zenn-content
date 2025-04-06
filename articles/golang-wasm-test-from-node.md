@@ -118,6 +118,18 @@ test('calculateSumWasm', async () => {
 });
 ```
 
+通常のテストと同様に`npm run test`で実行します。
+
+```bash
+ ✓ tests/wasm.test.js (1 test) 4ms
+   ✓ calculateSumWasm 3ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  21:10:39
+   Duration  271ms (transform 51ms, setup 0ms, collect 52ms, tests 4ms, environment 0ms, prepare 58ms)
+```
+
 ## 参考
 
 - [【Golang】【wasm】テストの仕方と注意点 @ Go 1.16+](https://qiita.com/KEINOS/items/0ab42c53dcebc5a925f0)

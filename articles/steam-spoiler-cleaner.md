@@ -1,9 +1,10 @@
 ---
-title: "Steamのネタバレ防止を無視する拡張機「steam-spoiler-cleane」の作成"
+title: "Steamのネタバレ防止を無視するChrome拡張機能「steam-spoiler-cleane」の作成"
 emoji: "🔖"
 type: "idea" # tech: 技術記事 / idea: アイデア
 topics: ["steam", "chrome拡張", "chromeextension"]
-published: false
+published: true
+published_at : "2025-05-03 20:30"
 ---
 
 ## 概要

@@ -31,3 +31,7 @@ npx zenn new:book
 ```bash
 npx zenn preview
 ```
+
+```bash
+npx zenn new:article --slug $SLUG --title $TITLE --type tech
+```

@@ -323,13 +323,6 @@ Hello, world!
 
 - [Announcing dotnet run app.cs – A simpler way to start with C# and .NET 10] <https://devblogs.microsoft.com/dotnet/announcing-dotnet-run-app/>
 
-### EF Core 10
-
-EF core 9 / 10の両方の破壊的変更の確認が必要そうです。
-
-- [EF Core 9 (EF9) での破壊的変更] <https://learn.microsoft.com/ja-jp/ef/core/what-is-new/ef-core-9.0/breaking-changes>
-- [EF Core 10 の破壊的変更 (EF10)] <https://learn.microsoft.com/ja-jp/ef/core/what-is-new/ef-core-10.0/breaking-changes>
-
 ### .NET ランタイム
 
 以下の改善・機能強化がなされたとのことです。

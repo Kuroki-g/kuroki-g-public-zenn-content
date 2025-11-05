@@ -8,7 +8,9 @@ published: false
 
 ## 概要
 
+.NET 10 (RC2) 時点の内容です。
 [.NET 10 の新機能] <https://learn.microsoft.com/ja-jp/dotnet/core/whats-new/dotnet-10/overview> から、抜粋します。詳細はリンク先を参照してください。
+本記事のコードは <https://github.com/Kuroki-g/kuroki-g-public-zenn-code/tree/main/articles/dotnet10-feature> にまとめてあります。
 
 ### .NET ライブラリ
 

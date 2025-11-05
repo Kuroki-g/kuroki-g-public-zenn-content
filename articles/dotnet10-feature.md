@@ -8,20 +8,109 @@ published: false
 
 ## 概要
 
-### 単一ファイルの実行
+[.NET 10 の新機能] <https://learn.microsoft.com/ja-jp/dotnet/core/whats-new/dotnet-10/overview> から、抜粋します。詳細はリンク先を参照してください。
 
-単一ファイルの実行が可能になりました。
+### .NET ライブラリ
 
-```cshap
-Console.WriteLine("Hello, world!");
+以下の内容をコードに起こしました。一部は省略しています。
+
+- [.NET 10 用 .NET ライブラリの新機能] <https://learn.microsoft.com/ja-jp/dotnet/core/whats-new/dotnet-10/libraries>
+
+#### グローバリゼーションと日付/時刻
+
+##### 文字列比較の数値の順序付け
+
+```csharp
+StringComparer numericStringComparer = StringComparer.Create(
+    System.Globalization.CultureInfo.CurrentCulture,
+    System.Globalization.CompareOptions.NumericOrdering // NumericOrderingオプションが追加されました。
+);
+
+Console.WriteLine(numericStringComparer.Equals("02", "2")); // これはTrueと判定されます。
+
+var sorted = new[] { "Windows XP", "Windows 10", "Windows 8", "Windows 11" }.Order(numericStringComparer);
+// 10、11の数字が考慮され、以下の順番で出力されます:
+// Windows 8
+// Windows 10
+// Windows 11
+// Windows XP
+foreach (string os in sorted)
+{
+    Console.WriteLine(os);
+}
+
+HashSet<string> set = new(numericStringComparer) { "007", "07", "7" };
+Console.WriteLine(string.Join(",", set.ToArray())); // Output: 007 <- 順番が考慮されます。
+Console.WriteLine(set.Contains("7")); // Output: True
+
+HashSet<string> set2 = new(numericStringComparer) { "7", "007", "07",  };
+Console.WriteLine(string.Join(",", set2.ToArray())); // Output: 7 <- 順番が考慮されます。
+Console.WriteLine(set2.Contains("007")); // Output: True
+
 ```
 
-```bash
-$ dotnet run hello.cs
-Hello, world!
+#### シリアル化
+
+##### JSON プロパティの重複を禁止するオプション
+
+```csharp
+record MyRecord(int Value);
+
+string json = """{ "Value": 1, "Value": -1 }""";
+Console.WriteLine(JsonSerializer.Deserialize<MyRecord>(json)?.Value); // -1
+
+// AllowDuplicatePropertiesを指定すると、例外となります。
+JsonSerializerOptions options = new() { AllowDuplicateProperties = false };
+try
+{
+    // JsonObject、Dictionary<string, int>でも同様にJsonExceptionとなります。
+    JsonSerializer.Deserialize<MyRecord>(json, options);
+}
+catch (JsonException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+
+// JsonDocumentでも同様に、AllowDuplicatePropertiesの設定が可能です。
+JsonDocumentOptions docOptions = new() { AllowDuplicateProperties = false };
+try
+{
+    JsonDocument.Parse(json, docOptions);
+}
+catch (JsonException ex)
+{
+    Console.WriteLine(ex.Message);
+}
 ```
 
-- [Announcing dotnet run app.cs – A simpler way to start with C# and .NET 10] <https://devblogs.microsoft.com/dotnet/announcing-dotnet-run-app/>
+##### 厳密な JSON シリアル化オプション
+
+```csharp
+string json = """{ "Value": 1, "Value": -1 }""";
+JsonSerializer.Deserialize<MyRecord>(json, JsonSerializerOptions.Strict);
+// JsonSerializerOptions.Strict プリセットが追加されました。
+// これは、以下のものに等しいです。
+// JsonUnmappedMemberHandling.Disallow
+// + JsonSerializerOptions.AllowDuplicateProperties = false
+// + case sensitive (大文字と小文字の区別)
+// + JsonSerializerOptions.RespectNullableAnnotations
+// + JsonSerializerOptions.RespectRequiredConstructorParameters
+// <https://github.com/dotnet/dotnet/blob/89c8f6a112d37d2ea8b77821e56d170a1bccdc5a/src/runtime/src/libraries/System.Text.Json/src/System/Text/Json/Serialization/JsonSerializerOptions.cs#L180>
+```
+
+#### その他
+
+他、複数の追加があります。
+
+- System.Numerics
+- オプションの検証
+- 診断
+- ZIP ファイル
+- Windows プロセス管理
+- WebSocket の機能強化
+- TLS の機能強化
+
+詳細は、[.NET 10 用 .NET ライブラリの新機能] <https://learn.microsoft.com/ja-jp/dotnet/core/whats-new/dotnet-10/libraries> を参照してください。
 
 ### C# 14 の新機能
 
@@ -118,7 +207,6 @@ public static class UnboundGenericTypesAndNameof
 ```
 
 - <https://github.com/Kuroki-g/kuroki-g-public-zenn-code/blob/main/articles/dotnet10-feature/UnboundGenericTypesAndNameof.cs>
-
 
 #### 単純なラムダ パラメーターの修飾子
 
@@ -218,12 +306,40 @@ class UserDefinedCompoundAssignment
 
 - `Span<T>` および `ReadOnlySpan<T>` のより暗黙的な変換
 
+### .NET SDK
+
+#### 単一ファイルの実行
+
+単一ファイルの実行が可能になりました。
+
+```cshap
+Console.WriteLine("Hello, world!");
+```
+
+```bash
+$ dotnet run hello.cs
+Hello, world!
+```
+
+- [Announcing dotnet run app.cs – A simpler way to start with C# and .NET 10] <https://devblogs.microsoft.com/dotnet/announcing-dotnet-run-app/>
+
 ### EF Core 10
 
 EF core 9 / 10の両方の破壊的変更の確認が必要そうです。
 
 - [EF Core 9 (EF9) での破壊的変更] <https://learn.microsoft.com/ja-jp/ef/core/what-is-new/ef-core-9.0/breaking-changes>
 - [EF Core 10 の破壊的変更 (EF10)] <https://learn.microsoft.com/ja-jp/ef/core/what-is-new/ef-core-10.0/breaking-changes>
+
+### .NET ランタイム
+
+以下の改善・機能強化がなされたとのことです。
+詳細は[.NET 10 ランタイムの新機能] <https://learn.microsoft.com/ja-jp/dotnet/core/whats-new/dotnet-10/runtime>を参照してください。
+
+- JIT コンパイラの機能強化
+- AVX10.2 のサポート
+- スタックの割り当て
+- NativeAOT 型の事前初期化機能の改善
+- Arm64 書き込みバリアの機能強化
 
 ## 参考リンク
 

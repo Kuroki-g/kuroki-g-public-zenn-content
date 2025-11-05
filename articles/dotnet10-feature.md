@@ -2,8 +2,9 @@
 title: ".NET 10 (C# 14) の新機能をまとめる"
 emoji: "📝"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: []
-published: false
+topics: ["csharp", "dotnet"]
+published: true
+published_at : "2025-11-06 09:00"
 ---
 
 ## 概要

@@ -125,31 +125,60 @@ JsonSerializer.Deserialize<MyRecord>(json, JsonSerializerOptions.Strict);
 #### 拡張メンバー
 
 ```csharp
-namespace Dotnet10Feature;
+namespace Dotnet10Feature.Extensions;
 
-public partial class MorePartialMembers
+/// <summary>
+/// 拡張メンバー
+/// C# 14 では、 拡張メンバーを定義するための新しい構文が追加されています。 
+/// </summary>
+/// <see href="https://learn.microsoft.com/ja-jp/dotnet/csharp/whats-new/csharp-14#extension-members"/> 
+public static class Enumerable
 {
-    // partial classが非常に長くなる場合に、このようにメソッドのみの宣言を事前にしておくことが可能です。
-    // NOTE: staticは不可です。
-    partial void PartialMethod(string s);
-
-    // partial classで部分コンストラクターの宣言が可能になりました。
-    // https://learn.microsoft.com/ja-jp/dotnet/csharp/programming-guide/classes-and-structs/constructors#partial-constructors
-    public partial MorePartialMembers();
-}
-
-public partial class MorePartialMembers
-{
-    partial void PartialMethod(string s) => Console.WriteLine($"Something happened: {s}");
-
-    public partial MorePartialMembers() // base()又はthis()の使用をする場合には、こちらに追加する必要があります。
+    // 新しく、extensionブロックを用いて拡張メンバーを宣言することができるようになりました。
+    // Extension block
+    // https://learn.microsoft.com/ja-jp/dotnet/csharp/programming-guide/classes-and-structs/extension-methods#declare-extension-members
+    extension<TSource>(IEnumerable<TSource> source) // extension members for IEnumerable<TSource>
     {
-        // ここに実装宣言に追加することができます。   
+        // 新しく拡張プロパティの宣言ができるようになりました:
+        public bool IsEmpty => !source.Any();
+
+        // 拡張メソッドの宣言をextensionブロックに書くことができます:
+        public IEnumerable<TSource> Where(Func<TSource, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    // C# 14より前の場合、拡張プロパティはないのでメソッドで宣言する必要があります。
+    public static bool BeforeC14IsEmpty<TSource>(this IEnumerable<TSource> source)
+        => !source.Any();
+
+    // 既存のC# 14より前のバージョンの拡張メソッドの宣言はこれまで通りです。
+    public static IEnumerable<TSource> BeforeC14Where<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+    {
+        throw new NotImplementedException();
+    }
+
+    // 静的メンバー + operatorのみの場合には、レシーバー型のみの、extensionブロックで表現することもできる。
+    extension<TSource>(IEnumerable<TSource>)
+    {
+        // static拡張メソッド:
+        public static IEnumerable<TSource> Combine(IEnumerable<TSource> first, IEnumerable<TSource> second)
+        {
+            throw new NotImplementedException();
+        }
+
+        // static拡張プロパティが定義可能です:
+        public static IEnumerable<TSource> Identity => System.Linq.Enumerable.Empty<TSource>();
+
+        // ユーザー定義のoperatorの定義ができるようになりました:
+        // NOTE: [Extensions (拡張型) 未確認飛行 C]<https://ufcpp.net/blog/2024/3/extensions/> を見るに、しばらく前から要望があったようです。
+        public static IEnumerable<TSource> operator +(IEnumerable<TSource> left, IEnumerable<TSource> right) => left.Concat(right);
     }
 }
 ```
 
-- <https://github.com/Kuroki-g/kuroki-g-public-zenn-code/blob/main/articles/dotnet10-feature/MorePartialMembers.cs>
+- <https://github.com/Kuroki-g/kuroki-g-public-zenn-code/blob/main/articles/dotnet10-feature/Extensions/Enumerable.cs>
 
 #### Null 条件付き割り当て
 
@@ -341,3 +370,7 @@ Hello, world!
 
 - [C# 14 / .NET 10 の新機能 (RC 1 時点)] <https://speakerdeck.com/nenonaninu/net-10-noxin-ji-neng-rc-1-shi-dian>
   - RC 1時点の、何縫ねの。氏による解説です。
+
+## 変更履歴
+
+2025/11/06 拡張メンバーのコードが別のものになっていたため差し替えを実施

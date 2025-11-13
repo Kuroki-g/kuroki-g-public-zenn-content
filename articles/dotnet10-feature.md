@@ -9,7 +9,6 @@ published_at : "2025-11-06 09:00"
 
 ## 概要
 
-.NET 10 (RC2) 時点の内容です。
 [.NET 10 の新機能] <https://learn.microsoft.com/ja-jp/dotnet/core/whats-new/dotnet-10/overview> から、抜粋します。詳細はリンク先を参照してください。
 本記事のコードは <https://github.com/Kuroki-g/kuroki-g-public-zenn-code/tree/main/articles/dotnet10-feature> にまとめてあります。
 
@@ -338,11 +337,50 @@ class UserDefinedCompoundAssignment
 
 - `Span<T>` および `ReadOnlySpan<T>` のより暗黙的な変換
 
-### .NET SDK
+### SDK と .NET 10 のツールの新機能
 
-#### 単一ファイルの実行
+抜粋したものを記します。詳細は以下を参照してください。
 
-単一ファイルの実行が可能になりました。
+- <https://learn.microsoft.com/ja-jp/dotnet/core/compatibility/10.0#sdk-and-msbuild>
+- <https://learn.microsoft.com/ja-jp/dotnet/core/whats-new/dotnet-10/sdk>
+- <https://learn.microsoft.com/ja-jp/dotnet/core/compatibility/10.0#sdk-and-msbuild>
+
+#### `slnx`形式の対応
+
+`dotnet new sln`の既定値が、SLNX ファイル形式になりました。
+今まではプレビューでのみ利用可能でしたが、可読性が向上しました。
+
+- <https://learn.microsoft.com/ja-jp/dotnet/core/compatibility/sdk/10.0/dotnet-new-sln-slnx-default>
+
+#### 一回限りのツール実行
+
+`dotnet tool exec`はNode.jsにおける、npx相当の機能です。
+`.config/dotnet-tools.json`がある場合には、それが考慮されます。
+
+例えば、[CSharpier]<https://www.nuget.org/packages/CSharpier>を指定すると、以下のようになります。
+
+```bash
+$ dotnet tool exec CSharpier 
+ツール パッケージ csharpier@1.2.1 がソース https://api.nuget.org/v3/index.json からダウンロードされます。
+続行しますか? [y/n] (y):
+```
+
+- <https://learn.microsoft.com/ja-jp/dotnet/core/whats-new/dotnet-10/sdk#one-shot-tool-execution>
+
+#### 新しい dnx ツールの実行スクリプト
+
+使い心地は`dnx` = `dotnet dnx` = `dotnet tool exec`です。
+
+[dotnet tool exec](https://learn.microsoft.com/ja-jp/dotnet/core/tools/dotnet-tool-exec) より引用:
+
+- `dotnet dnx` - `dnx` スクリプト自体を簡単に実装する方法として使用される`dotnet tool exec`の非表示のエイリアス
+- `dnx` - SDK から `dotnet dnx`を呼び出すシェル スクリプト。このスクリプトはインストーラーによって提供され、`PATH`で使用できます。 `dnx <toolname>`を介して直接ツールを簡単に使用できます。
+
+NOTE: [新しい dnx ツールの実行スクリプト](https://learn.microsoft.com/ja-jp/dotnet/core/whats-new/dotnet-10/sdk#the-new-dnx-tool-execution-script) の説明が分かりにくいので、[dotnet tool exec](https://learn.microsoft.com/ja-jp/dotnet/core/tools/dotnet-tool-exec) を見る方が良いです。
+
+#### ファイルベースのアプリの機能強化
+
+C# 14 および .NET 10 以降では、 ファイル ベースのアプリを作成出来るようになりました。
 
 ```cshap
 Console.WriteLine("Hello, world!");
@@ -353,7 +391,60 @@ $ dotnet run hello.cs
 Hello, world!
 ```
 
-- [Announcing dotnet run app.cs – A simpler way to start with C# and .NET 10] <https://devblogs.microsoft.com/dotnet/announcing-dotnet-run-app/>
+- <https://learn.microsoft.com/ja-jp/dotnet/core/whats-new/dotnet-10/sdk#file-based-apps-enhancements>
+- <https://learn.microsoft.com/ja-jp/dotnet/csharp/tour-of-csharp/overview#file-based-apps>
+
+NOTE: RC2時点では、[Announcing dotnet run app.cs – A simpler way o start with C# and .NET 10] <https://devblogs.microsoft.com/dotnet/announcing-dotnet-run-app/> にのみ記されていたものが、[SDK と .NET 10 のツールの新機能]<https://learn.microsoft.com/ja-jp/dotnet/core/whats-new/dotnet-10/sdk>の一項目として、明確に記載されました。
+
+#### フレームワークによって提供されるパッケージ参照の排除
+
+.NET 9では、推移的な依存関係に対してでしたが、さらに強化され、直接の依存関係に対しても不要なパッケージ参照の排除が可能になりました。
+
+- <https://learn.microsoft.com/ja-jp/dotnet/core/whats-new/dotnet-10/sdk#pruning-of-framework-provided-package-references>
+- <https://learn.microsoft.com/ja-jp/nuget/consume-packages/package-references-in-project-files#prunepackagereference>
+
+#### より一貫性のあるコマンド順序
+
+aliasが追加されました。
+
+| 新しい名詞優先フォーム (New Noun-First Form) | エイリアス (Alias) |
+| :---------------------------------------- | :------------------------ |
+| `dotnet package add`                      | `dotnet add package`      |
+| `dotnet package list`                     | `dotnet list package`     |
+| `dotnet package remove`                   | `dotnet remove package`   |
+| `dotnet reference add`                    | `dotnet add reference`    |
+| `dotnet reference list`                   | `dotnet list reference`   |
+| `dotnet reference remove`                 | `dotnet remove reference` |
+
+#### ネイティブ シェルのタブ補完スクリプト
+
+タブ補完が強化されました。タブ補完に用いるスクリプトを生成することができます。
+
+```bash
+dotnet completions script bash
+```
+
+タブ補完自体については、@nil2氏による、[Bash用の補完スクリプトの作り方](https://qiita.com/nil2/items/8a1544e206928c753a2e)などを参照のこと。
+
+#### その他
+
+RuntimeIdentifiersを使う場合の使用感の向上
+
+- .NET ツールの機能強化
+  - プラットフォーム固有の .NET ツール
+  - プラットフォーム固有の .NET ツールで any RuntimeIdentifier を使用する
+
+- .NET Framework MSBuild で .NET MSBuild タスクを使用する
+- CLI コマンドは、対話式端末ではデフォルトで対話モードに設定されます
+
+コンテナの機能の強化
+
+- コンソール アプリでコンテナー イメージをネイティブに作成できる
+- コンテナーのイメージ形式を明示的に制御する
+
+Microsoft Testing Platformサポートの向上
+
+- dotnet test における Microsoft Testing Platform のサポート
 
 ### .NET ランタイム
 
@@ -373,4 +464,5 @@ Hello, world!
 
 ## 変更履歴
 
+2025/11/14 .NET SDKの機能強化について更新  
 2025/11/06 拡張メンバーのコードが別のものになっていたため差し替えを実施

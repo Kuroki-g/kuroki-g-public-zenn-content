@@ -469,6 +469,7 @@ Microsoft Testing Platformサポートの向上
 
 - [C# 14 / .NET 10 の新機能 (RC 1 時点)] <https://speakerdeck.com/nenonaninu/net-10-noxin-ji-neng-rc-1-shi-dian>
   - RC 1時点の、何縫ねの。氏による解説です。
+- [Microsoft⁠⁠、.NET 10をリリース —⁠— Visual Studio 2026も一般提供開始] <https://gihyo.jp/article/2025/11/dotnet-10>
 
 ## 変更履歴
 

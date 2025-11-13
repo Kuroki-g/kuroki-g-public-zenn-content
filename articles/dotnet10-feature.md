@@ -457,6 +457,14 @@ Microsoft Testing Platformサポートの向上
 - NativeAOT 型の事前初期化機能の改善
 - Arm64 書き込みバリアの機能強化
 
+### 公式のコンテナイメージ
+
+既定のイメージがDebianからUbuntuになりました。
+
+`mcr.microsoft.com/dotnet/sdk:10.0`: Ubuntu 24.04 "Noble Numbat"
+
+- <https://learn.microsoft.com/ja-jp/dotnet/core/compatibility/containers/10.0/default-images-use-ubuntu>
+
 ## 参考リンク
 
 - [C# 14 / .NET 10 の新機能 (RC 1 時点)] <https://speakerdeck.com/nenonaninu/net-10-noxin-ji-neng-rc-1-shi-dian>
@@ -464,5 +472,6 @@ Microsoft Testing Platformサポートの向上
 
 ## 変更履歴
 
+2025/11/14 コンテナイメージのセクションを追加 
 2025/11/14 .NET SDKの機能強化について更新  
 2025/11/06 拡張メンバーのコードが別のものになっていたため差し替えを実施

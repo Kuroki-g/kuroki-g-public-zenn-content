@@ -108,6 +108,10 @@ public class WidgetsController : Controller
 
 NOTE: .NET 10におけるOpenAPIのyamlでの生成は<https://github.com/dotnet/aspnetcore/issues/61041>で対応中のようですので、そのうちサポートされるかと思われます。
 
+## サンプルコード
+
+- <https://github.com/Kuroki-g/kuroki-g-public-zenn-code/tree/main/articles/use-dotnet10-instead-of-typespec>
+
 ## 参考文献
 
 - [4万行超のopenapi.yamlをTypeSpecに移行した話](https://zenn.dev/yuta_takahashi/articles/migrate-to-typespec)

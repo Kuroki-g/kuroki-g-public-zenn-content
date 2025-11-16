@@ -15,7 +15,7 @@ OpenAPI / Swagger使ってますか？
 
 - そもそもyaml / jsonを直接書くのがつらい
 - 長くて読みにくい
-- 生成AIに気軽に食わせられない
+- コンテクストを圧迫するため、生成AIの料金の圧迫
 
 また、gRPCの表現ができない、という弱点もあります。
 このため、REST、OpenAPI、gRPCなどのプロトコルで共通するAPI形状を記述するために開発された専用の言語が[TypeSpec](https://typespec.io/)です。

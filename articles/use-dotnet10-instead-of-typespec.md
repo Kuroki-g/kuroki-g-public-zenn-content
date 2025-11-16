@@ -118,22 +118,28 @@ public class WidgetsController : Controller
 
 ## ASP.NET Coreである理由
 
-OpenAPIの生成であれば、最近のフレームワークで対応しているものが多数あります。
+OpenAPIの生成だけが目的ならば、様々な手法があります。
 
 - Golang × swag <https://github.com/swaggo/swag>
 - Hono × hono-openapi <https://hono.dev/examples/hono-openapi>
+- Zod × zod-to-openapi <https://github.com/asteasolutions/zod-to-openapi>
 - Laravel × L5-Swagger <https://github.com/DarkaOnLine/L5-Swagger>
 - Laravel × Scribe <https://scribe.knuckles.wtf/laravel/>
 
 しかし、動的型付けの言語では型定義が弱く、品質の高いOpenAPIを作ることが困難です。
-一方で、静的型付けだとしても、コメントで書いていく場合には、コメント自体の形式の間違いの可能性があるため、これもまた非常に厄介な問題となります。
-しかし、.NET10ならではのメリットがあります。
+また、静的型付けだとしても、TypeScriptはNode.js系のためエコシステムの移り変わりが激しすぎるため、仕様書を安定的に生成するという観点では、負債となるリスクもあります。モノレポの管理も考慮すべきですが、`tsconfig.json`の設定が複雑になることが多いです。
+さらに、静的型付けだとしても、コメントで書いていく場合には、形式の間違いの可能性は非常に厄介な問題となります。
 
-- LTSによる後方互換性・保守性
-- フレームワーク自体に内蔵
-- コードをそのままASP.NET coreバックエンド開発に流用できる
-- C#の厳密な型定義
-- アノテーションが属性による定義のため、アノテーションの形式チェックをビルドで可能
+しかし、.NET10だと非常に強いメリットがあります。
+
+- エコシステム自体の安定性・設定の容易性
+  - LTSによる後方互換性・保守性
+  - sln / slnxファイルによる一元管理
+  - ASP.NET core内蔵の設定の簡易さ
+- 厳密な型定義
+  - C#の厳密な型定義
+  - アノテーションが属性による定義のため、アノテーションの形式チェックをビルドで可能
+- ライブラリに固めることができるため、定義したコードをそのままASP.NET coreバックエンド開発に流用できる
 
 ※ .NET 8 LTSではSwashbuckle等採用のため、all-in-oneではなかった  
 ※ .NET9から、`Microsoft.AspNetCore.OpenApi`と`Microsoft.Extensions.ApiDescription.Server`はあるが、LTSではない

@@ -102,9 +102,9 @@ public class WidgetsController : Controller
 左：TypeSpecの生成、右：.NET 10の生成です。
 （注意：.NET 10は、現時点ではyaml形式の直接のCLI生成をサポートしていないので、手動変換している）
 
-![Modelの場合]( /images/typespec-1/yaml-1.png)
+![Modelの場合](/images/typespec-1/yaml-1.png)
 
-![Pathの場合]( /images/typespec-1/yaml-2.png)
+![Pathの場合](/images/typespec-1/yaml-2.png)
 
 NOTE: .NET 10におけるOpenAPIのyamlでの生成は<https://github.com/dotnet/aspnetcore/issues/61041>で対応中のようですので、そのうちサポートされるかと思われます。
 

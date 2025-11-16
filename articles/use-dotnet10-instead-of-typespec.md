@@ -3,7 +3,8 @@ title: "API仕様書 (OpenAPI) の管理に.NET 10を用いる"
 emoji: "🦔"
 type: "idea" # tech: 技術記事 / idea: アイデア
 topics: ["typespec", "openapi", "dotnet", "swagger"]
-published: false
+published: true
+published_at : "2025-11-16 22:00"
 ---
 
 ## はじめに

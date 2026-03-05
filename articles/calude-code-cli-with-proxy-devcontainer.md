@@ -1,5 +1,5 @@
 ---
-title: "DevContainerでClaude Codeを使ってみる (Squid版)"
+title: "iptablesなしでOK！SquidプロキシでClaude Codeの通信を制御するDevContainer構築"
 emoji: "🦑"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["claudecode", "devcontainer", "squid", "docker"]
@@ -157,3 +157,7 @@ while true; do
     sleep 0.5
 done
 ```
+
+## 変更履歴
+
+- 2026/03/06 タイトルを変更
